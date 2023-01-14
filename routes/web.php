@@ -26,7 +26,7 @@ Route::get('login',function(){
 });
 
 Route::resource('categoria', CategoryController::class);
-Route::resource('sub-categoria', SubCategoryController::class);
+Route::resource('subcategoria', SubCategoryController::class);
 Route::resource('departamento', DepartamentController::class);
 
 Route::resource('bienes-nacionales', BienNacionalyController::class);

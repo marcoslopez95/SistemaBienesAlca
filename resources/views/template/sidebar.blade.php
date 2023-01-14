@@ -27,7 +27,7 @@
             <span>Categorias</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="{{route('subcategoria.index')}}">
             <i class="fas fa-stream"></i>
             <span>Subcategoria</span></a>
     </li>

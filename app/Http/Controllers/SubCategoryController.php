@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubCategoriaRequest;
+use App\Models\Categoria;
+use App\Models\SubCategoria;
 use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
@@ -13,7 +16,8 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $data['items'] = SubCategoria::with('categoria')->get();
+        return view('subcategoria.index',$data);
     }
 
     /**
@@ -23,7 +27,8 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        //
+        $data['categorias'] = Categoria::all();
+        return view('subcategoria.create',$data);
     }
 
     /**
@@ -32,9 +37,11 @@ class SubCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubCategoriaRequest $request)
     {
-        //
+        $SubCategoria = SubCategoria::create($request->all());
+
+        return redirect(route('subcategoria.index'));
     }
 
     /**
@@ -43,9 +50,12 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(SubCategoria $subcategorium)
     {
-        //
+        $data['subcategoria'] = $subcategorium;
+        $data['categorias'] = Categoria::all();
+
+        return view('subcategoria.show', $data);
     }
 
     /**
@@ -66,9 +76,11 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SubCategoriaRequest $request, SubCategoria $subcategorium)
     {
-        //
+        $subcategorium->update($request->all());
+
+        return redirect(route('subcategoria.index'));
     }
 
     /**
@@ -77,8 +89,10 @@ class SubCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SubCategoria $subcategorium)
     {
-        //
+        $subcategorium->delete();
+
+        return redirect(route('subcategoria.index'));
     }
 }
