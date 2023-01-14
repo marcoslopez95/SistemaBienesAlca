@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -47,5 +48,31 @@ class Bienes extends Model
 
     public function departamento(){
         return $this->belongsTo(Departamento::class,'codigo_dep','codigo_dep');
+    }
+
+    public function scopeFilter(Builder $q, $request){
+        return $q->when($request->name, function($q,$name){
+            return $q->where('nombre_bien','like',"%$name%");
+        })
+        ->when($request->codigo_bien, function($q,$codigo){
+            return $q->where('codigo_bien','like',"%$codigo%");
+        })
+        ->when($request->status,function($q,$status){
+            return $q->whereIn('satus_bien',$status);
+        })->when($request->date_ini && $request->date_end,function($q) use ($request){
+            $init = Carbon::parse($request->date_ini)->startOfDay();
+            $end = Carbon::parse($request->date_end)->endOfDay();
+            return $q->whereBetween('fecha_bien',[$init,$end]);
+        })
+        ->when($request->codigo_cat, function($q,$codigo){
+            return $q->whereIn('codigo_cat',$codigo);
+        })
+        ->when($request->codigo_subcat, function($q,$codigo){
+            return $q->whereIn('codigo_subcat',$codigo);
+        })
+        ->when($request->codigo_dep, function($q,$codigo){
+            return $q->whereIn('codigo_dep',$codigo);
+        })
+        ;
     }
 }

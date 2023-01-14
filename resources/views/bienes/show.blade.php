@@ -24,7 +24,7 @@
 @section('content')
     <div class="card shadow mb-4 mx-5">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Registro de Bien Nacional</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Actualizar Bien Nacional</h6>
         </div>
         <div class="card-body">
 
@@ -141,7 +141,7 @@
                     </a>
                     <div class="col"></div>
                     <button type="submit" class="btn btn-primary btn-user ">
-                        <i class="fas fa-list"></i> Registrar
+                        <i class="fas fa-list"></i> Actualizar
                     </button>
                 </div>
             </form>

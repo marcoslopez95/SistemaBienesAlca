@@ -19,7 +19,7 @@
         </div>
         <div class="col"></div>
         <div class="col text-right">
-            <a href="{{route('bienes-nacionales.create')}}" class="btn btn-primary btn-icon-split">
+            <a href="{{ route('bienes-nacionales.create') }}" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
                     <i class="fas fa-list"></i>
 
@@ -33,6 +33,65 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
+            <div class="row">
+                <a href="#collapseCardExample" class="btn btn-primary" data-toggle="collapse" role="button"
+                    aria-expanded="false" aria-controls="collapseCardExample">
+                    Filtro
+                </a>
+                <div class="col"></div>
+                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            </div>
+            <div class="collapse" id="collapseCardExample" aria-expanded="false">
+                <div class="card-body">
+                    <form action="{{ route('bienes-nacionales.index') }}">
+                        <div class="row">
+                            <span class="font-weight-bold">Estatus:</span>
+                            @foreach ($filtro['status'] as $item)
+                                <span class="mx-1">
+                                    <input type="checkbox" id="status-{{ $item }}" name="status[]"
+                                        value="{{ $item }}" />
+                                    <label for="status-{{ $item }}">{{ $item }}</label>
+                                </span>
+                            @endforeach
+                        </div>
+                        <div class="row">
+                            <span class="font-weight-bold">Departamentos:</span>
+                            @foreach ($filtro['departamentos'] as $item)
+                                <span class="mx-1">
+                                    <input type="checkbox" id="dep-{{ $item->codigo_dep }}" name="codigo_dep[]"
+                                        value="{{ $item->codigo_dep }}" />
+                                    <label for="dep-{{ $item->codigo_dep }}">{{ $item->nombre_dep }}</label>
+                                </span>
+                            @endforeach
+                        </div>
+                        <div class="row">
+                            <span class="font-weight-bold">Categorias:</span>
+                            @foreach ($filtro['categorias'] as $item)
+                                <span class="mx-1">
+                                    <input type="checkbox" id="cat-{{ $item->codigo_cat }}" name="codigo_cat[]"
+                                        value="{{ $item->codigo_cat }}" />
+                                    <label for="cat-{{ $item->codigo_cat }}">{{ $item->nombre_cat }}</label>
+                                </span>
+                            @endforeach
+                        </div>
+                        <div class="row">
+                            <span class="font-weight-bold">Subcategorias:</span>
+                            @foreach ($filtro['subcategorias'] as $item)
+                                <span class="mx-1">
+                                    <input type="checkbox" id="sub-{{ $item->codigo_subcat }}" name="codigo_subcat[]"
+                                        value="{{ $item->codigo_subcat }}" />
+                                    <label for="sub-{{ $item->codigo_subcat }}">{{ $item->nombre_subcat }}</label>
+                                </span>
+                            @endforeach
+                        </div>
+                        <div class="row">
+                            <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                    class="fas fa-search"></i>Filtrar Ahora</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
             {{-- <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6> --}}
         </div>
         <div class="card-body">
@@ -69,36 +128,42 @@
                     <tbody>
                         @foreach ($bienes as $bien)
                             <tr>
-                                <td>{{$bien->codigo_bien}}</td>
-                                <td>{{$bien->nombre_bien}}</td>
+                                <td>{{ $bien->codigo_bien }}</td>
+                                <td>{{ $bien->nombre_bien }}</td>
                                 <td>
-                                    <a target="_blank" href="{{$bien->foto_bien}}" class="btn btn-primary btn-circle btn-sm">
+                                    <a target="_blank" href="{{ $bien->foto_bien }}"
+                                        class="btn btn-primary btn-circle btn-sm">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a target="_blank" href="{{$bien->acta_bien}}" class="btn btn-primary btn-circle btn-sm">
+                                    <a target="_blank" href="{{ $bien->acta_bien }}"
+                                        class="btn btn-primary btn-circle btn-sm">
                                         <i class="fas fa-eye"></i>
                                     </a>
 
                                 </td>
-                                <td>{{$bien->fecha_bien}}</td>
-                                <td>{{$bien->departamento->nombre_dep}}</td>
-                                <td>{{$bien->subcategoria->nombre_subcat}}</td>
-                                <td>{{$bien->subcategoria->categoria->nombre_cat}}</td>
-                                <td>{{$bien->satus_bien}}</td>
+                                <td>{{ $bien->fecha_bien }}</td>
+                                <td>{{ $bien->departamento->nombre_dep }}</td>
+                                <td>{{ $bien->subcategoria->nombre_subcat }}</td>
+                                <td>{{ $bien->subcategoria->categoria->nombre_cat }}</td>
+                                <td>{{ $bien->satus_bien }}</td>
                                 {{-- <td>{{$categoria->descri_cat}}</td> --}}
                                 <td>
                                     <div class="row mx-auto">
                                         <div class="mx-2">
-                                            <a href="{{route('bienes-nacionales.show',['bienes_nacionale'=>$bien->id_bien])}}" class="btn btn-sm btn-info btn-circle" title="editar">
+                                            <a href="{{ route('bienes-nacionales.show', ['bienes_nacionale' => $bien->id_bien]) }}"
+                                                class="btn btn-sm btn-info btn-circle" title="editar">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         </div>
-                                        <form action="{{route('bienes-nacionales.destroy',['bienes_nacionale'=>$bien->id_bien])}}" method="post">
+                                        <form
+                                            action="{{ route('bienes-nacionales.destroy', ['bienes_nacionale' => $bien->id_bien]) }}"
+                                            method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger btn-circle" title="eliminar">
+                                            <button type="submit" class="btn btn-sm btn-danger btn-circle"
+                                                title="eliminar">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>

@@ -18,9 +18,22 @@ class BienNacionalyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data['bienes'] = Bienes::with('departamento','subcategoria.categoria')->get();
+        $data['filtro'] = [
+            'status' => [
+                'Operativo',
+                'No Existe',
+                'Inoperativo',
+                'En Reparación',
+                'Por Verificar',
+            ],
+            'departamentos' => Departamento::all(),
+            'categorias' => Categoria::all(),
+            'subcategorias' => SubCategoria::all(),
+        ];
+        $data['bienes'] = Bienes::with('departamento','subcategoria.categoria')
+                            ->filter($request)->get();
         return view('bienes.index', $data);
     }
 
@@ -53,8 +66,8 @@ class BienNacionalyController extends Controller
     public function store(BienNacionalRequest $request)
     {
         $request->merge([
-            'foto_bien' => $request->file('file1')->store('/public/bienes'),
-            'acta_bien' => $request->file('file2')->store('/public/actas'),
+            'acta_bien' => $request->file('file1')->store('/public/bienes'),
+            'foto_bien' => $request->file('file2')->store('/public/actas'),
             'codigo_usu'   =>Auth::user()->codigo_usu,
         ]);
 
@@ -106,10 +119,10 @@ class BienNacionalyController extends Controller
     public function update(BienNacionalUpdateRequest $request, Bienes $bienes_nacionale)
     {
         if($request->file1){
-            $request['foto_bien'] = $request->file('file1')->store('/public/bienes');
+            $request['acta_bien'] = $request->file('file1')->store('/public/bienes');
         }
         if($request->file2){
-            $request['acta_bien'] = $request->file('file2')->store('/public/actas');
+            $request['foto_bien'] = $request->file('file2')->store('/public/actas');
         }
         $request->merge([
             'codigo_usu'   =>Auth::user()->codigo_usu,
