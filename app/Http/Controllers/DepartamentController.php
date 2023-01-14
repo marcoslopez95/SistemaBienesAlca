@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DepartamentoRequest;
+use App\Models\Departamento;
 use Illuminate\Http\Request;
 
 class DepartamentController extends Controller
@@ -13,7 +15,8 @@ class DepartamentController extends Controller
      */
     public function index()
     {
-        //
+        $data['items'] = Departamento::all();
+        return view('departamento.index',$data);
     }
 
     /**
@@ -23,7 +26,7 @@ class DepartamentController extends Controller
      */
     public function create()
     {
-        //
+        return view('departamento.create');
     }
 
     /**
@@ -32,9 +35,11 @@ class DepartamentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DepartamentoRequest $request)
     {
-        //
+        $SubCategoria = Departamento::create($request->all());
+
+        return redirect(route('departamento.index'));
     }
 
     /**
@@ -43,9 +48,11 @@ class DepartamentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Departamento $departamento)
     {
-        //
+        $data['departamento'] = $departamento;
+
+        return view('departamento.show', $data);
     }
 
     /**
@@ -66,9 +73,11 @@ class DepartamentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DepartamentoRequest $request, Departamento $departamento)
     {
-        //
+        $departamento->update($request->all());
+
+        return redirect(route('departamento.index'));
     }
 
     /**
@@ -77,8 +86,10 @@ class DepartamentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Departamento $departamento)
     {
-        //
+        $departamento->delete();
+
+        return redirect(route('departamento.index'));
     }
 }

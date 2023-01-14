@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ubicacion extends Model
+class Departamento extends Model
 {
     use HasFactory;
 
@@ -14,4 +14,5 @@ class Ubicacion extends Model
     protected $fillable = [
         'nombre_dep',
     ];
+    public $timestamps = false;
 }

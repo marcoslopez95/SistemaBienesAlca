@@ -32,7 +32,7 @@
             <span>Subcategoria</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="{{route('departamento.index')}}">
             <i class="fas fa-project-diagram"></i>
             <span>Departamentos</span></a>
     </li>
