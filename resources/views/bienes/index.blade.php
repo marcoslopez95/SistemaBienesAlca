@@ -91,11 +91,11 @@
                                 <td>
                                     <div class="row mx-auto">
                                         <div class="mx-2">
-                                            <a href="{{route('bienes-nacionales.show',['bienes_nacionale'=>$bien->codigo_bien])}}" class="btn btn-sm btn-info btn-circle" title="editar">
+                                            <a href="{{route('bienes-nacionales.show',['bienes_nacionale'=>$bien->id_bien])}}" class="btn btn-sm btn-info btn-circle" title="editar">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         </div>
-                                        <form action="{{route('bienes-nacionales.destroy',['bienes_nacionale'=>$bien->codigo_bien])}}" method="post">
+                                        <form action="{{route('bienes-nacionales.destroy',['bienes_nacionale'=>$bien->id_bien])}}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger btn-circle" title="eliminar">

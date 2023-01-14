@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BienNacionalRequest;
+use App\Http\Requests\BienNacionalUpdateRequest;
 use App\Models\Bienes;
 use App\Models\Categoria;
 use App\Models\Departamento;
@@ -68,9 +69,20 @@ class BienNacionalyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Bienes $bienes_nacionale)
     {
-        //
+        $data['status'] = [
+            'Operativo',
+            'No Existe',
+            'Inoperativo',
+            'En Reparación',
+            'Por Verificar',
+        ];
+        $data['categorias'] = Categoria::all();
+        $data['subcategorias'] = (SubCategoria::all());
+        $data['departamentos'] = Departamento::all();
+        $data['bien'] = $bienes_nacionale;
+        return view('bienes.show',$data);
     }
 
     /**
@@ -91,9 +103,21 @@ class BienNacionalyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BienNacionalUpdateRequest $request, Bienes $bienes_nacionale)
     {
-        //
+        if($request->file1){
+            $request['foto_bien'] = $request->file('file1')->store('/public/bienes');
+        }
+        if($request->file2){
+            $request['acta_bien'] = $request->file('file2')->store('/public/actas');
+        }
+        $request->merge([
+            'codigo_usu'   =>Auth::user()->codigo_usu,
+        ]);
+
+        $bienes_nacionale->update($request->all());
+
+        return redirect(route('bienes-nacionales.index'));
     }
 
     /**
@@ -102,8 +126,10 @@ class BienNacionalyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Bienes $bienes_nacionale)
     {
-        //
+        $bienes_nacionale->delete();
+
+        return redirect(route('bienes-nacionales.index'));
     }
 }

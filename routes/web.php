@@ -32,5 +32,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('subcategoria', SubCategoryController::class);
     Route::resource('departamento', DepartamentController::class);
 
-    Route::resource('bienes-nacionales', BienNacionalyController::class);
+    Route::resource('bienes-nacionales', BienNacionalyController::class)->except('update');
+    Route::post('bienes-nacionales/{bienes_nacionale}', [BienNacionalyController::class,'update'])->name('bienes-nacionales.update');
 });
