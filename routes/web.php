@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\BienNacionalyController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DepartamentController;
+use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +19,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('dashboard');
-});
+})->name('home');
 
 Route::get('login',function(){
     return view('auth.login');
 });
+
+Route::resource('categoria', CategoryController::class);
+Route::resource('sub-categoria', SubCategoryController::class);
+Route::resource('departamento', DepartamentController::class);
+
+Route::resource('bienes-nacionales', BienNacionalyController::class);

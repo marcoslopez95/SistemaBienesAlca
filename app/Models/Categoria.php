@@ -9,11 +9,12 @@ class Categoria extends Model
 {
     use HasFactory;
 
-    protected  $table = 'tab_catego';
+    protected $table = 'tab_catego';
     protected $primaryKey = 'codigo_cat';
     protected $fillable = [
         'nombre_cat',
         'descri_cat',
     ];
+    public $timestamps = false;
 
 }
