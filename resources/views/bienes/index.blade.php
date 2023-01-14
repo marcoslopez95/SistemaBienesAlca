@@ -71,8 +71,17 @@
                             <tr>
                                 <td>{{$bien->codigo_bien}}</td>
                                 <td>{{$bien->nombre_bien}}</td>
-                                <td>{{$bien->foto_bien}}</td>
-                                <td>{{$bien->acta_bien}}</td>
+                                <td>
+                                    <a target="_blank" href="{{$bien->foto_bien}}" class="btn btn-primary btn-circle btn-sm">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a target="_blank" href="{{$bien->acta_bien}}" class="btn btn-primary btn-circle btn-sm">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+
+                                </td>
                                 <td>{{$bien->fecha_bien}}</td>
                                 <td>{{$bien->departamento->nombre_dep}}</td>
                                 <td>{{$bien->subcategoria->nombre_subcat}}</td>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,6 +27,16 @@ class Bienes extends Model
         'codigo_dep',
     ];
 
+    public function getFechaBienAttribute($value){
+        return Carbon::parse($value)->format('d-m-Y');
+    }
+    public function getFotoBienAttribute($value){
+        return str_replace("public","storage",$value);
+    }
+    public function getActaBienAttribute($value){
+        return str_replace("public","storage",$value);
+
+    }
     public function subcategoria() {
         return $this->belongsTo(subcategoria::class,'codigo_subcat','codigo_subcat');
     }

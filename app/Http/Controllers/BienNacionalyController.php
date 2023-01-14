@@ -59,7 +59,7 @@ class BienNacionalyController extends Controller
 
         Bienes::create($request->all());
 
-        return redirect(route('bienes.index'));
+        return redirect(route('bienes-nacionales.index'));
     }
 
     /**
