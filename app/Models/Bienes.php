@@ -11,27 +11,30 @@ class Bienes extends Model
 
     protected $table = 'tab_bienes';
     protected $primaryKey = 'id_bien';
+    public $timestamps = false;
     protected $fillable = [
         'codigo_bien',
         'nombre_bien',
         'satus_bien',
         'foto_bien',
         'fecha_bien',
+        'acta_bien',
 
+        'codigo_subcat',
         'codigo_cat',
         'codigo_usu',
-        'codigo_ubi',
+        'codigo_dep',
     ];
 
-    public function categoria() {
-        return $this->belongsTo(Categoria::class,'codigo_cat','codigo_cat');
+    public function subcategoria() {
+        return $this->belongsTo(subcategoria::class,'codigo_subcat','codigo_subcat');
     }
 
     public function usuario() {
         return $this->belongsTo(Usuario::class,'codigo_usu','codigo_usu');
     }
 
-    public function ubicacion(){
-        return $this->belongsTo(Ubicacion::class,'codigo_ubi','codigo_ubi');
+    public function departamento(){
+        return $this->belongsTo(Departamento::class,'codigo_dep','codigo_dep');
     }
 }

@@ -39,6 +39,7 @@
                 @include('template.navbar')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    @include('template.errors')
                     @yield('content')
                     @include('template.footer')
                 </div>

@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BienNacionalRequest;
+use App\Models\Bienes;
+use App\Models\Categoria;
+use App\Models\Departamento;
+use App\Models\SubCategoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BienNacionalyController extends Controller
 {
@@ -13,7 +19,8 @@ class BienNacionalyController extends Controller
      */
     public function index()
     {
-        //
+        $data['bienes'] = Bienes::with('departamento','subcategoria.categoria')->get();
+        return view('bienes.index', $data);
     }
 
     /**
@@ -23,7 +30,17 @@ class BienNacionalyController extends Controller
      */
     public function create()
     {
-        //
+        $data['status'] = [
+            'Operativo',
+            'No Existe',
+            'Inoperativo',
+            'En Reparación',
+            'Por Verificar',
+        ];
+        $data['categorias'] = Categoria::all();
+        $data['subcategorias'] = (SubCategoria::all());
+        $data['departamentos'] = Departamento::all();
+        return view('bienes.create',$data);
     }
 
     /**
@@ -32,9 +49,17 @@ class BienNacionalyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BienNacionalRequest $request)
     {
-        //
+        $request->merge([
+            'foto_bien' => $request->file('file1')->store('/public/bienes'),
+            'acta_bien' => $request->file('file2')->store('/public/actas'),
+            'codigo_usu'   =>Auth::user()->codigo_usu,
+        ]);
+
+        Bienes::create($request->all());
+
+        return redirect(route('bienes.index'));
     }
 
     /**

@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'clave_usu'
     ];
+
+    public function username()
+{
+    return 'cedula_usu';
+}
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\BienNacionalyController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepartamentController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,16 +18,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-})->name('home');
 
-Route::get('login',function(){
-    return view('auth.login');
+Route::middleware(['guest'])->group(function () {
+    Route::get('login',[LoginController::class,'view'])->name('login');
+    Route::post('login',[LoginController::class,'login'])->name('login-store');
 });
 
-Route::resource('categoria', CategoryController::class);
-Route::resource('subcategoria', SubCategoryController::class);
-Route::resource('departamento', DepartamentController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('home');
+    Route::resource('categoria', CategoryController::class);
+    Route::resource('subcategoria', SubCategoryController::class);
+    Route::resource('departamento', DepartamentController::class);
 
-Route::resource('bienes-nacionales', BienNacionalyController::class);
+    Route::resource('bienes-nacionales', BienNacionalyController::class);
+});
