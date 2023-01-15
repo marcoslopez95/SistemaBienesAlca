@@ -38,8 +38,10 @@ class Bienes extends Model
         return str_replace("public","storage",$value);
 
     }
+
+    // Relaciones
     public function subcategoria() {
-        return $this->belongsTo(subcategoria::class,'codigo_subcat','codigo_subcat');
+        return $this->belongsTo(SubCategoria::class,'codigo_subcat','codigo_subcat');
     }
 
     public function usuario() {
@@ -49,6 +51,7 @@ class Bienes extends Model
     public function departamento(){
         return $this->belongsTo(Departamento::class,'codigo_dep','codigo_dep');
     }
+    // -----------------------------------
 
     public function scopeFilter(Builder $q, $request){
         return $q->when($request->name, function($q,$name){
@@ -59,10 +62,11 @@ class Bienes extends Model
         })
         ->when($request->status,function($q,$status){
             return $q->whereIn('satus_bien',$status);
-        })->when($request->date_ini && $request->date_end,function($q) use ($request){
-            $init = Carbon::parse($request->date_ini)->startOfDay();
-            $end = Carbon::parse($request->date_end)->endOfDay();
-            return $q->whereBetween('fecha_bien',[$init,$end]);
+        })
+        ->when($request->date_ini && $request->date_end,function($q) use ($request){
+            $init = Carbon::parse($request->date_ini)->startOfDay(); // 15/01/2023 00:00:00
+            $end = Carbon::parse($request->date_end)->endOfDay();    // 23/01/2023 23:59:59
+            return $q->whereBetween('fecha_bien',[$init,$end]); // Esto es para obtener los registros entre las dos fechas.
         })
         ->when($request->codigo_cat, function($q,$codigo){
             return $q->whereIn('codigo_cat',$codigo);

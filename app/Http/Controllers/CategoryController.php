@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    // Controladores de tipo resource
+
     /**
      * Display a listing of the resource.
      *

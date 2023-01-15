@@ -34,6 +34,8 @@ class BienNacionalyController extends Controller
         ];
         $data['bienes'] = Bienes::with('departamento','subcategoria.categoria')
                             ->filter($request)->get();
+
+
         return view('bienes.index', $data);
     }
 
@@ -68,10 +70,10 @@ class BienNacionalyController extends Controller
         $request->merge([
             'acta_bien' => $request->file('file1')->store('/public/bienes'),
             'foto_bien' => $request->file('file2')->store('/public/actas'),
-            'codigo_usu'   =>Auth::user()->codigo_usu,
+            'codigo_usu'   => Auth::user()->codigo_usu,
         ]);
 
-        Bienes::create($request->all());
+        Bienes::create($request->all()); // $request->all() -> DEVOLVER UN ARRAY;
 
         return redirect(route('bienes-nacionales.index'));
     }

@@ -34,7 +34,6 @@ class BienNacionalRequest extends FormRequest
             'fecha_bien'     => 'required|date',
             'file1'           => 'required|file',
             'file2'          => 'required|file',
-
         ];
     }
 }
