@@ -12,31 +12,36 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item @if (strpos(Route::currentRouteName(), 'home') === 0) active @endif">
         <a class="nav-link" href="{{route('home')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
+
     </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <li class="nav-item">
+    <li class="nav-item @if (strpos(Route::currentRouteName(), 'categoria') === 0) active @endif">
+
         <a class="nav-link" href="{{route('categoria.index')}}">
             <i class="fas fa-list"></i>
             <span>Categorias</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item @if (strpos(Route::currentRouteName(),'subcategoria') === 0) active @endif">
+
         <a class="nav-link" href="{{route('subcategoria.index')}}">
             <i class="fas fa-stream"></i>
             <span>Subcategoria</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item @if (strpos(Route::currentRouteName(),'departamento') === 0 ) active @endif">
+
         <a class="nav-link" href="{{route('departamento.index')}}">
             <i class="fas fa-project-diagram"></i>
             <span>Departamentos</span></a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item @if (strpos(Route::currentRouteName(),'bienes-nacionales') === 0) active @endif">
+
         <a class="nav-link" href="{{route('bienes-nacionales.index')}}">
             <i class="fas fa-folder-open"></i>
             <span>Bienes Nacionales</span></a>

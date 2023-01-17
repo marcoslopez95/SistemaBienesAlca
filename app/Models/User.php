@@ -27,8 +27,12 @@ class User extends Authenticatable
         'clave_usu'
     ];
 
+    public function getFullNameAttribute(){
+        return $this->nombre_usu.' '.$this->apelli_usu;
+    }
+
     public function username()
-{
-    return 'cedula_usu';
-}
+    {
+        return 'cedula_usu';
+    }
 }
