@@ -15,4 +15,8 @@ class Departamento extends Model
         'nombre_dep',
     ];
     public $timestamps = false;
+
+    public function bienes(){
+        return $this->hasMany(Bienes::class,'codigo_dep','codigo_dep');
+    }
 }

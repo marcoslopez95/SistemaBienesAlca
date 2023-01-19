@@ -3,6 +3,7 @@
 use App\Http\Controllers\BienNacionalyController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepartamentController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -26,9 +27,7 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('logout',[LoginController::class,'logout'])->name('logout');
-    Route::get('/', function () {
-        return view('dashboard');
-    })->name('home');
+    Route::get('/', HomeController::class)->name('home');
     Route::resource('categoria', CategoryController::class);
     Route::resource('subcategoria', SubCategoryController::class);
     Route::resource('departamento', DepartamentController::class);
