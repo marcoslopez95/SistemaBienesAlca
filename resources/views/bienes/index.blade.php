@@ -39,7 +39,7 @@
                     Filtro
                 </a>
                 <div class="col"></div>
-                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                <a href="{{route('bienes-nacionales.report')}}" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                         class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
             </div>
             <div class="collapse" id="collapseCardExample" aria-expanded="false">

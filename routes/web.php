@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('subcategoria', SubCategoryController::class);
     Route::resource('departamento', DepartamentController::class);
 
+    Route::get('bienes-nacionales/report', [BienNacionalyController::class,'report'])->name('bienes-nacionales.report');
     Route::resource('bienes-nacionales', BienNacionalyController::class)->except('update');
     Route::post('bienes-nacionales/{bienes_nacionale}', [BienNacionalyController::class,'update'])->name('bienes-nacionales.update');
 });

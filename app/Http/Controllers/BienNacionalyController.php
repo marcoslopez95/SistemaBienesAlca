@@ -10,6 +10,9 @@ use App\Models\Departamento;
 use App\Models\SubCategoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
+use Mpdf\Mpdf;
 
 class BienNacionalyController extends Controller
 {
@@ -32,6 +35,7 @@ class BienNacionalyController extends Controller
             'categorias' => Categoria::all(),
             'subcategorias' => SubCategoria::all(),
         ];
+        Session::put('filter',json_encode($request->all()));
         $data['bienes'] = Bienes::with('departamento','subcategoria.categoria')
                             ->filter($request)->get();
 
@@ -147,4 +151,22 @@ class BienNacionalyController extends Controller
 
         return redirect(route('bienes-nacionales.index'));
     }
+
+    public function report(Request $request) {
+        $info = json_decode(Session::get('filter'));
+        foreach($info as $key => $value) {
+            $request[$key] = $value;
+        }
+        $data['bienes'] = Bienes::with('departamento','subcategoria.categoria')
+                            ->filter($request)->get();
+
+        $html = view('reports.bienes-report',$data);
+        $nombre_archivo = 'reporte-bienes-nacionales-'.date('Y-m-d_H:i');
+        $pdf = new Mpdf();
+        $pdf->WriteHTML($html);
+        header('Content-Type: application/pdf');
+        header("Content-Disposition: inline; filename='$nombre_archivo.pdf'");
+        return $pdf->Output("$nombre_archivo.pdf", 'I');
+    }
 }
+
