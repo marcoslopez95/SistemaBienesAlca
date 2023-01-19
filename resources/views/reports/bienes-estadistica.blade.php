@@ -35,5 +35,19 @@
                 <td style="height: 20px"></td>
             </tr>
         @endforeach
+        <tr>
+            <td colspan="6">
+                <hr>
+            </td>
+
+        </tr>
+        <tr>
+            <td><b>Total Bienes</b></td>
+            @foreach ($status as $sta)
+                <td align="center">
+                  {{ ($bienes->where('satus_bien', $sta))->count() }}
+                </td>
+            @endforeach
+        </tr>
     </tbody>
 @endsection
