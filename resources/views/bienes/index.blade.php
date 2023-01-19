@@ -34,13 +34,23 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="row">
-                <a href="#collapseCardExample" class="btn btn-primary" data-toggle="collapse" role="button"
-                    aria-expanded="false" aria-controls="collapseCardExample">
-                    Filtro
-                </a>
-                <div class="col"></div>
-                <a href="{{route('bienes-nacionales.report')}}" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                        class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                <div class="col">
+                    <a href="#collapseCardExample" class="btn btn-primary btn btn-sm d-none d-sm-inline-block shadow-sm" data-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="collapseCardExample">
+                        Filtro
+                    </a>
+                </div>
+                <div class="col text-center">
+                    <a href="{{ route('bienes-nacionales.report',["type_report"=> 'estadistica']) }}" target="_blank"
+                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-download fa-sm text-white-50"></i> Estadísticas</a>
+                </div>
+                <div class="col text-right">
+
+                    <a href="{{ route('bienes-nacionales.report') }}" target="_blank"
+                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-download fa-sm text-white-50"></i> Reporte</a>
+                </div>
             </div>
             <div class="collapse" id="collapseCardExample" aria-expanded="false">
                 <div class="card-body">
@@ -145,8 +155,8 @@
                                 </td>
                                 <td>{{ $bien->fecha_bien }}</td>
                                 <td>{{ $bien->departamento->nombre_dep }}</td>
-                                <td>{{ $bien->subcategoria->nombre_subcat }}</td>
                                 <td>{{ $bien->subcategoria->categoria->nombre_cat }}</td>
+                                <td>{{ $bien->subcategoria->nombre_subcat }}</td>
                                 <td>{{ $bien->satus_bien }}</td>
                                 {{-- <td>{{$categoria->descri_cat}}</td> --}}
                                 <td>

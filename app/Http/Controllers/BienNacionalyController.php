@@ -160,7 +160,19 @@ class BienNacionalyController extends Controller
         $data['bienes'] = Bienes::with('departamento','subcategoria.categoria')
                             ->filter($request)->get();
 
-        $html = view('reports.bienes-report',$data);
+        switch($request->type_report){
+            case 'estadistica':
+                $data['departamentos']  = Departamento::all();
+                $data['categorias']  = Categoria::all();
+                $html = view('reports.bienes-estadistica', $data);
+                break;
+            case 'normal':
+                $html = view('reports.bienes-report',$data);
+                break;
+            default:
+                $html = view('reports.bienes-report',$data);
+                break;
+        }
         $nombre_archivo = 'reporte-bienes-nacionales-'.date('Y-m-d_H:i');
         $pdf = new Mpdf();
         $pdf->WriteHTML($html);
@@ -168,5 +180,6 @@ class BienNacionalyController extends Controller
         header("Content-Disposition: inline; filename='$nombre_archivo.pdf'");
         return $pdf->Output("$nombre_archivo.pdf", 'I');
     }
+
 }
 
