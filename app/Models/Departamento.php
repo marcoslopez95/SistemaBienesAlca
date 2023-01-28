@@ -13,10 +13,15 @@ class Departamento extends Model
     protected $primaryKey = 'codigo_dep';
     protected $fillable = [
         'nombre_dep',
+        'cedula_dire'
     ];
     public $timestamps = false;
 
     public function bienes(){
         return $this->hasMany(Bienes::class,'codigo_dep','codigo_dep');
+    }
+
+    public function director(){
+        return $this->belongsTo(Director::class,'cedula_dire','cedula_dire');
     }
 }

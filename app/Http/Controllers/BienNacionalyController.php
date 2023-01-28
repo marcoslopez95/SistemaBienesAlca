@@ -159,14 +159,16 @@ class BienNacionalyController extends Controller
         }
         $data['bienes'] = Bienes::with('departamento','subcategoria.categoria')
                             ->filter($request)->get();
-
+        $data['membrete'] = true;
         switch($request->type_report){
             case 'estadistica':
+                $data['membrete'] = false;
                 $data['departamentos']  = Departamento::all();
                 $data['categorias']  = Categoria::all();
                 $html = view('reports.bienes-estadistica', $data);
                 break;
             case 'normal':
+
                 $html = view('reports.bienes-report',$data);
                 break;
             default:

@@ -42,6 +42,7 @@
                         <tr>
                             <th>Codigo</th>
                             <th>Nombre</th>
+                            <th>Director</th>
                             {{-- <th>Descripcion</th> --}}
                             <th>Acciones</th>
                         </tr>
@@ -50,7 +51,7 @@
                         <tr>
                             <th>Codigo</th>
                             <th>Nombre</th>
-                            {{-- <th>Descripcion</th> --}}
+                            <th>Director</th>
                             <th>Acciones</th>
                         </tr>
                     </tfoot>
@@ -59,7 +60,11 @@
                             <tr>
                                 <td>{{$departamento->codigo_dep}}</td>
                                 <td>{{$departamento->nombre_dep}}</td>
-                                {{-- <td>{{$categoria->descri_cat}}</td> --}}
+                                <td>
+                                    @if ($departamento->director)
+                                    {{$departamento->director->full_name}}
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="row mx-auto">
                                         <div class="mx-2">

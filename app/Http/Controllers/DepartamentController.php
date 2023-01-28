@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DepartamentoRequest;
 use App\Models\Departamento;
+use App\Models\Director;
 use Illuminate\Http\Request;
 
 class DepartamentController extends Controller
@@ -15,7 +16,8 @@ class DepartamentController extends Controller
      */
     public function index()
     {
-        $data['items'] = Departamento::all();
+        $data['items'] = Departamento::with('director')->get();
+        // dd($data['items']);
         return view('departamento.index',$data);
     }
 
@@ -37,8 +39,8 @@ class DepartamentController extends Controller
      */
     public function store(DepartamentoRequest $request)
     {
-        $SubCategoria = Departamento::create($request->all());
-
+        $director = Director::create($request->director);
+        $departamento = $director->departamento()->create($request->only('nombre_dep'));
         return redirect(route('departamento.index'));
     }
 

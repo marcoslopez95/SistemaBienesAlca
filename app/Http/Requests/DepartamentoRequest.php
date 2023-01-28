@@ -25,6 +25,7 @@ class DepartamentoRequest extends FormRequest
     {
         return [
             'nombre_dep' => 'required|string',
+            'director.cedula_dire' => 'required|unique:tab_direc,cedula_dire'
         ];
     }
 }

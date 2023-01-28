@@ -15,13 +15,29 @@
                 </div> --}}
                 <div class="col-sm-6">
                     <input type="text" name="nombre_dep" class="form-control form-control-user" id="exampleLastName"
-                        placeholder="Nombre">
+                        placeholder="Nombre de la oficina o departamento">
                 </div>
             </div>
-            {{-- <div class="form-group">
-                <input type="text" name="descri_cat" class="form-control form-control-user" id="exampleInputEmail"
-                    placeholder="descripcion">
-            </div> --}}
+            <hr />
+            <div class="row text-center mb-3">
+                <h6 class="m-0 font-weight-bold text-primary mx-auto">Datos del Director</h6>
+            </div>
+            <div class="form-group row gap-3">
+                <div class="col-sm-6">
+                    <input type="text" name="director[nombre_dire]" class="form-control form-control-user" id="exampleLastName"
+                        placeholder="Nombres">
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" name="director[apelli_dire]" class="form-control form-control-user" id="exampleLastName"
+                        placeholder="Apellidos">
+                </div>
+            </div>
+            <div class="form-group row gap-3">
+                <div class="col-sm-6">
+                    <input type="text" name="director[cedula_dire]" class="form-control form-control-user" id="exampleLastName"
+                        placeholder="Cedula de identidad">
+                </div>
+            </div>
 
             <div class="row">
 
@@ -33,6 +49,7 @@
                     <i class="fas fa-list"></i> Crear Departamento
                 </button>
             </div>
+
         </form>
     </div>
 </div>
