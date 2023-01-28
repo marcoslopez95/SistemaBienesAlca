@@ -77,7 +77,15 @@ class DepartamentController extends Controller
      */
     public function update(DepartamentoRequest $request, Departamento $departamento)
     {
-        $departamento->update($request->all());
+        Director::updateOrCreate(
+            ['cedula_dire' => $request->director['cedula_dire']],
+            [
+                'nombre_dire' => $request->director['nombre_dire'],
+                'apelli_dire' => $request->director['apelli_dire']
+            ]
+        );
+        $request['cedula_dire'] =$request->director['cedula_dire'];
+        $departamento->update($request->except('director'));
 
         return redirect(route('departamento.index'));
     }
@@ -90,6 +98,9 @@ class DepartamentController extends Controller
      */
     public function destroy(Departamento $departamento)
     {
+        if($departamento->bienes){
+            return back()->withErrors('El departamento '. $departamento->nombre_dep .' tiene bienes asignados');
+        }
         $departamento->delete();
 
         return redirect(route('departamento.index'));

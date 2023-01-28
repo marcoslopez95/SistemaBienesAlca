@@ -26,6 +26,26 @@
                 @error('nombre_cat', 'descri_cat')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror --}}
+                <hr />
+                <div class="row text-center mb-3">
+                    <h6 class="m-0 font-weight-bold text-primary mx-auto">Datos del Director</h6>
+                </div>
+                <div class="form-group row gap-3">
+                    <div class="col-sm-6">
+                        <input type="text" name="director[nombre_dire]" class="form-control form-control-user" id="exampleLastName"
+                            placeholder="Nombres" value="{{$departamento->director->nombre_dire ?? ''}}">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" name="director[apelli_dire]" class="form-control form-control-user" id="exampleLastName"
+                            placeholder="Apellidos" value="{{$departamento->director->apelli_dire ?? ''}}">
+                    </div>
+                </div>
+                <div class="form-group row gap-3">
+                    <div class="col-sm-6">
+                        <input type="text" name="director[cedula_dire]" class="form-control form-control-user" id="exampleLastName"
+                            placeholder="Cedula de identidad" value="{{$departamento->director->cedula_dire ?? ''}}">
+                    </div>
+                </div>
                 <div class="row">
 
                     <a href="{{ route('departamento.index') }}" class="btn btn-danger btn-user ">

@@ -153,13 +153,19 @@ class BienNacionalyController extends Controller
     }
 
     public function report(Request $request) {
+        // dd($request->all());
         $info = json_decode(Session::get('filter'));
         foreach($info as $key => $value) {
             $request[$key] = $value;
         }
+
+        if($request->type_report == 'acta' && !$request->codigo_dep){
+            return back()->withErrors('Para imprimir un acta se debe de filtrar UN departamento primero');
+        }
         $data['bienes'] = Bienes::with('departamento','subcategoria.categoria')
                             ->filter($request)->get();
-        $data['membrete'] = true;
+        $data['membrete'] = $request->membrete;
+
         switch($request->type_report){
             case 'estadistica':
                 $data['membrete'] = false;
@@ -168,16 +174,21 @@ class BienNacionalyController extends Controller
                 $html = view('reports.bienes-estadistica', $data);
                 break;
             case 'normal':
-
                 $html = view('reports.bienes-report',$data);
                 break;
+            case 'acta':
+                $data['departamento'] = Departamento::find(...$request->codigo_dep);
+                    $html = view('reports.bienes-report',$data);
+                    break;
             default:
                 $html = view('reports.bienes-report',$data);
                 break;
         }
         $nombre_archivo = 'reporte-bienes-nacionales-'.date('Y-m-d_H:i');
         $pdf = new Mpdf();
+        $pdf->SetHTMLFooter(view('reports.header'));
         $pdf->WriteHTML($html);
+
         header('Content-Type: application/pdf');
         header("Content-Disposition: inline; filename='$nombre_archivo.pdf'");
         return $pdf->Output("$nombre_archivo.pdf", 'I');

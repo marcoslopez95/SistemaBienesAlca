@@ -47,6 +47,12 @@
                 </div>
                 <div class="col text-right">
 
+                    <a href="{{ route('bienes-nacionales.report',['membrete' =>true,'type_report'=>'acta']) }}" target="_blank"
+                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-download fa-sm text-white-50"></i> Acta entrega</a>
+                </div>
+                <div class="col text-right">
+
                     <a href="{{ route('bienes-nacionales.report') }}" target="_blank"
                         class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i> Reporte</a>

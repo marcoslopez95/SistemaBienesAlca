@@ -1,16 +1,19 @@
 @extends('reports.base')
 
 @section('body')
+<thead>
+
+    <tr>
+        <th align="center" width="150px">Codigo</th>
+        <th align="center" width="150px">Nombre</th>
+        <th align="center" width="150px">Fecha Llegada</th>
+        <th align="center" width="150px">Departamento</th>
+        <th align="center" width="150px">Categoria</th>
+        <th align="center" width="150px">Subcategoria</th>
+        <th align="center" width="150px">Status</th>
+    </tr>
+</thead>
     <tbody>
-        <tr>
-            <th align="center" width="150px">Codigo</th>
-            <th align="center" width="150px">Nombre</th>
-            <th align="center" width="150px">Fecha Llegada</th>
-            <th align="center" width="150px">Departamento</th>
-            <th align="center" width="150px">Categoria</th>
-            <th align="center" width="150px">Subcategoria</th>
-            <th align="center" width="150px">Status</th>
-        </tr>
 
             @foreach ($bienes as $bien)
                 <tr>

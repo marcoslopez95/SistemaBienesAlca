@@ -23,9 +23,16 @@ class DepartamentoRequest extends FormRequest
      */
     public function rules()
     {
+        if($this->isMethod('post')){
+            return [
+                'nombre_dep' => 'required|string',
+                'director.cedula_dire' => 'required|unique:tab_direc,cedula_dire'
+            ];
+        }
         return [
             'nombre_dep' => 'required|string',
-            'director.cedula_dire' => 'required|unique:tab_direc,cedula_dire'
+            'director.cedula_dire' => 'required|unique:tab_direc,cedula_dire,'.$this->director['cedula_dire'].',cedula_dire'
         ];
+
     }
 }
