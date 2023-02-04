@@ -147,13 +147,13 @@
                                 <td>{{ $bien->codigo_bien }}</td>
                                 <td>{{ $bien->nombre_bien }}</td>
                                 <td>
-                                    <a target="_blank" href="{{ $bien->foto_bien }}"
+                                    <a target="_blank" href="{{ asset('public/'.$bien->foto_bien) }}"
                                         class="btn btn-primary btn-circle btn-sm">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a target="_blank" href="{{ $bien->acta_bien }}"
+                                    <a target="_blank" href="{{ asset('public/'.$bien->acta_bien )}}"
                                         class="btn btn-primary btn-circle btn-sm">
                                         <i class="fas fa-eye"></i>
                                     </a>

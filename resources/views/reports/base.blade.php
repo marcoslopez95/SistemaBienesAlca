@@ -39,7 +39,7 @@
         <table>
             <tr>
                 <td style="border-bottom: 1px solid black">
-                    <img src="/img/escudo.png" width="150px" height="150px">
+                    <img src="public/img/escudo.png" width="150px" height="150px">
                 </td>
                 <td align="center" style="font-size: 20px;border-bottom: 1px solid black">
                     República Bolivariana de Venezuela <br>
@@ -48,7 +48,7 @@
                     RIF: G-20001459-8
                 </td>
                 <td align="right" style="border-bottom: 1px solid black">
-                    <img src="/img/lado-dere.jpg" width="150px" height="150px">
+                    <img src="public/img/lado-dere.jpg" width="150px" height="150px">
                 </td>
             </tr>
         </table>

@@ -26,6 +26,8 @@ class Bienes extends Model
         'codigo_cat',
         'codigo_usu',
         'codigo_dep',
+
+        'observation'
     ];
 
     public function getFechaBienAttribute($value){

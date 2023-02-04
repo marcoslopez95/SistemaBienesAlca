@@ -40,6 +40,10 @@
                         <input type="text" name="nombre_bien" class="form-control form-control-user" id="exampleLastName"
                             placeholder="Nombre" value="{{$bien->nombre_bien}}">
                     </div>
+                    <div class="col-sm-12 mt-3">
+                        <textarea type="text" name="observation" class="form-control form-control-user" id="exampleLastName"
+                            placeholder="Observacion" >{{$bien->observation}}</textarea>
+                    </div>
                     <div class="col-sm-6">
                         <label>Fecha de Recepción</label>
                         <input type="date" name="fecha_bien" class="form-control form-control-user" id="exampleLastName"
@@ -120,14 +124,15 @@
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         Foto del Bien Nacional
                         <label for="file2">
-                            <img id="img2" src="/{{$bien->foto_bien}}" width="200px" height="200px">
+                            <img id="img2" src="{{asset('public/'.$bien->foto_bien)}}" width="200px" height="200px">
                         </label>
                         <input type="file" id="file2" name="file2" />
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         Foto del acta de recepción
                         <label for="file1">
-                            <img id="img" src="/{{$bien->acta_bien}}" width="200px" height="200px">
+                            <img id="img" src="{{asset('public/'.$bien->acta_bien)}}" width="200px" height="200px">
+
                         </label>
                         <input type="file" id="file1" name="file1" />
                     </div>
